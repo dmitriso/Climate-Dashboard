@@ -20,28 +20,26 @@
         <!-- side bar search engine for cities -->
         <aside class="col-3 mt-4 " style="max-width: 20rem;">
             <!-- search bar input -->
-            <div class="input-group">
+            <form class="input-group">
                 <input type="text" class="form-control cityName" placeholder="Search a city" id="newCity"></input>
                 <button class="btn btn-warning" type="button" id="searchCity"><i class="fa fa-search"
                         aria-hidden="true"></i></button>
-            </div>
+            </form>
             <br><br>
             <!-- list of previously searched cities -->
-            <ul class="list-group">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"></li>
-                <li class="list-group-item"></li>
+            <ul class="list-group list-group-flush" id="cityList">
             </ul>
         </aside>
         <!-- main card that displays weather -->
         <div class="col-9">
-            <section class="card mt-4 " style="width: 70rem">
+            <section class="card mt-4 " style="">
                 <div class="card-body text-center">
                     <!-- this displays current date and city -->
                     <h2 id="currentCity"></h2>
 
                     <div id="weather">
                         <div id="description"></div>
+                        <div id="icon"><img id="wicon" src="" alt="Weather icon" /></div>
                         <div id="fahrenheit"></div>
                         <div id="celcius"></div>
                         <div id="humidity"></div>
@@ -52,18 +50,52 @@
             </section>
 
             <!-- section that contains the upcoming forecasts for the week -->
-            <section class="card  mt-4" style="width: 70rem">
+            <section class="card  mt-4" style="">
                 <div class="card-body">
                     <h3>5 Day Forecast:</h3>
                     <!-- forecast cards go here -->
-                    <div class="row">
-                        <div class="card col-2 " id="day1"></div>
-                        <div class="card col-2" id="day2"></div>
-                        <div class="card col-2" id="day3"></div>
-                        <div class="card col-2" id="day4"></div>
-                        <div class="card col-2" id="day5"></div>
+                    <div class="row justify-content-center">
+                        <div class="card col-2 mx-2" id="day1">
+                            <div id="date1"></div>
+                            <div><img id="wicon1" src="" alt="Weather icon" /></div>
+                            <br><br>
+                            <div id="temp1"></div>
+                            <br><br>
+                            <div id="humidity1"></div>
+                        </div>
+                        <div class="card col-2 mx-2" id="day2">
+                            <div id="date2"></div>
+                            <div><img id="wicon2" src="" alt="Weather icon" /></div>
+                            <br><br>
+                            <div id="temp2"></div>
+                            <br><br>
+                            <div id="humidity2"></div>
+                        </div>
+                        <div class="card col-2 mx-2" id="day3">
+                            <div id="date3"></div>
+                            <div><img id="wicon3" src="" alt="Weather icon" /></div>
+                            <br><br>
+                            <div id="temp3"></div>
+                            <br><br>
+                            <div id="humidity3"></div>
+                        </div>
+                        <div class="card col-2 mx-2" id="day4">
+                            <div id="date4"></div>
+                            <div><img id="wicon4" src="" alt="Weather icon" /></div>
+                            <br><br>
+                            <div id="temp4"></div>
+                            <br><br>
+                            <div id="humidity4"></div>
+                        </div>
+                        <div class="card col-2 mx-2" id="day5">
+                            <div id="date5"></div>
+                            <div><img id="wicon5" src="" alt="Weather icon" /></div>
+                            <br><br>
+                            <div id="temp5"></div>
+                            <br><br>
+                            <div id="humidity5"></div>
+                        </div>
                     </div>
-
                 </div>
             </section>
         </div>
