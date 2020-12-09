@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS links -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/spacelab/bootstrap.min.css" />
+    <link rel="stylesheet" href="Assets/style.css" />
+    <title>Weather-Dashboard</title>
+</head>
+
+<body class="">
+    <!-- heading element -->
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-primary justify-content-center">
+        <h1 class="text-white">Climate</h1>
+    </nav>
+
+    <main class="row justify-content-center">
+        <!-- side bar search engine for cities -->
+        <aside class="col-3 mt-4 " style="max-width: 20rem;">
+            <!-- search bar input -->
+            <div class="input-group">
+                <input type="text" class="form-control cityName" placeholder="Search a city" id="newCity"></input>
+                <button class="btn btn-warning" type="button" id="searchCity"><i class="fa fa-search"
+                        aria-hidden="true"></i></button>
+            </div>
+            <br><br>
+            <!-- list of previously searched cities -->
+            <ul class="list-group">
+                <li class="list-group-item"></li>
+                <li class="list-group-item"></li>
+                <li class="list-group-item"></li>
+            </ul>
+        </aside>
+        <!-- main card that displays weather -->
+        <div class="col-9">
+            <section class="card mt-4 " style="width: 70rem">
+                <div class="card-body text-center">
+                    <!-- this displays current date and city -->
+                    <h2 id="currentCity"></h2>
+
+                    <div id="weather">
+                        <div id="description"></div>
+                        <div id="fahrenheit"></div>
+                        <div id="celcius"></div>
+                        <div id="humidity"></div>
+                        <div id="windSpeed"></div>
+                        <div id="uv"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- section that contains the upcoming forecasts for the week -->
+            <section class="card  mt-4" style="width: 70rem">
+                <div class="card-body">
+                    <h3>5 Day Forecast:</h3>
+                    <!-- forecast cards go here -->
+                    <div class="row">
+                        <div class="card col-2 " id="day1"></div>
+                        <div class="card col-2" id="day2"></div>
+                        <div class="card col-2" id="day3"></div>
+                        <div class="card col-2" id="day4"></div>
+                        <div class="card col-2" id="day5"></div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+</body>
+<!-- Javascript links -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://use.fontawesome.com/d6227e9d77.js"></script>
+<script src="Assets/script.js"></script>
+
+</html>
