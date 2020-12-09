@@ -14,31 +14,62 @@
 
 var key = "84eba78b970b65a9aa20f76723c97703";
 var degree = "\u02DA";
-
-
-
+var cityList = [];
+var cityName = $("#newCity").val();
 
 $(document).ready(function () {
-    // retrieve local storage (searched cities)
+    // Retrieve local storage (searched cities)
+    var storedCities = JSON.parse(localStorage.getItem("cityList"));
+    if (storedCities !== null) {
+        cityList = storedCities;
+    }
+
+
+    renderCities();
+
+        // for loop that retrieves all searched cities
+        function renderCities() {
+
+            $("#cityList").empty();
+    
+            for (var i=0; i < cityList.length; i++) {
+                // this creates a new button and appends it to the ul with a value of each previously searched city
+                $("ul").append($("<button>").text(cityList[i]));
+                // this adds classes to the enw buttons
+                $("button").addClass("input-group-item");
+                $("button").addClass("previousCity");
+            }  
+        }
+        // Create event that sets previouse city buttons to searched city if clicked
+        // $(".previouscity").on("click", function() {
+            
+
+        // })
+
+
+
+        function storeCities() {
+            // console.log(cityList);
+            localStorage.setItem("cityList",JSON.stringify(cityList));
+            
+        }
+        
     // function that pulls weather data from Open Weather Api
     $("#searchCity").on("click", function (event) {
         event.preventDefault();
-
         // local variables for method use
         var cityName = $("#newCity").val();
-        // var lat;
-        // var lon;
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + key;
 
+        // This pushes the new city into the city list array
+        cityList.push(cityName);
         // This method pulls the lat and lon of new city to be used 
         $.ajax({
             url: queryURL,
             method: "Get"
         }).then(function (res) {
             console.log(res);
-            console.log(res.coord.lat);
             lat = res.coord.lat;
-            console.log(res.coord.lon);
             lon = res.coord.lon;
 
             var lat;
@@ -50,33 +81,34 @@ $(document).ready(function () {
                 method: "Get"
             }).then(function (response) {
                 console.log(response);
-                // console.log(gpsURL);
+                
                 var fahrenheit = Math.round(((parseFloat(res.main.temp) - 273.15) * 1.80 + 32));
                 var celcius = Math.round(parseFloat(res.main.temp) - 273.15);
-                // console.log(fahrenheit);
                 // Displays data onto designated elements
-                $("#currentCity").text(res.name);
+                $("#currentCity").text(res.name+"|"+(moment().format(" MMM. Do YY")));
                 $("#description").text("Clouds: " + res.weather[0].description);
-                $("#humidity").text("Humidity: " + res.main.humidity);
+                $("#humidity").text("Humidity: " + res.main.humidity + "%");
                 $("#windSpeed").text("Wind Speed: " + res.wind.speed);
                 $("#fahrenheit").text("Temp: " + fahrenheit + degree + "F");
                 $("#celcius").text("Temp: " + celcius + degree + "C");
                 // Displaying data from second object
                 $("#uv").text("UV Index: "+ response.current.uvi);
 
-
-                $("#day1").text(Math.round(((response.daily[0].temp.day)- 273.15) * 1.80 + 32));
-                $("#day2").text(Math.round(((response.daily[1].temp.day)- 273.15) * 1.80 + 32));
-                $("#day3").text(Math.round(((response.daily[2].temp.day)- 273.15) * 1.80 + 32));
-                $("#day4").text(Math.round(((response.daily[3].temp.day)- 273.15) * 1.80 + 32));
-                $("#day5").text(Math.round(((response.daily[4].temp.day)- 273.15) * 1.80 + 32));
+                // This Displays 5 day forecast for the week
+                // forecast for temp
+                // $("#temp1").text(Math.round(((response.daily[0].temp.day)- 273.15) * 1.80 + 32));
+                // $("#temp2").text(Math.round(((response.daily[1].temp.day)- 273.15) * 1.80 + 32));
+                // $("#temp3").text(Math.round(((response.daily[2].temp.day)- 273.15) * 1.80 + 32));
+                // $("#temp4").text(Math.round(((response.daily[3].temp.day)- 273.15) * 1.80 + 32));
+                // $("#temp5").text(Math.round(((response.daily[4].temp.day)- 273.15) * 1.80 + 32));
+                // forecast for humidity
+                // $("#humidity1").text(response.daily[0].humidity+ "%");
 
             })
         })
-
-
-
-
+        // This saves the users serached city to local storage
+        storeCities();
+        
     });
 });
 
