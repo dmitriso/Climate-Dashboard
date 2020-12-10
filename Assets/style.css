@@ -1,0 +1,23 @@
+/* adding classes to color code UV index */
+.low {
+    background-color: darkseagreen;
+}
+
+.moderate {
+    background-color: khaki;
+}
+
+
+.high {
+    background-color: lightsalmon;
+}
+
+.extreme {
+    background-color: mediumslateblue;
+}
+
+.nextDay {
+    background-color: slategray;
+    color: white;
+}
+
