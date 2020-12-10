@@ -9,18 +9,13 @@ $(document).ready(function () {
     // Retrieve local storage (searched cities)
     var storedCities = JSON.parse(localStorage.getItem("cityList"));
          cityList = storedCities;
+
+    
    
         renderCities();
-    
 
-
-    
-
-    // for loop that retrieves all searched cities
+    // For loop that retrieves all searched cities
     function renderCities() {
-
-        // $("#cityList").empty();
-
         for (var i = 0; i < storedCities.length; i++) {
             // this creates a new button and appends it to the ul with a value of each previously searched city
             $("ul").prepend($("<button>").text(storedCities[i]));
@@ -28,13 +23,16 @@ $(document).ready(function () {
             $("button").addClass("input-group-item");
             $("button").addClass("city");
         }
+        // This grabs users last city that was searched
+        var oldCity = storedCities[storedCities.length -1];
+        searchCity(oldCity);
     }
-
+    // This attaches  and sets conditions for search button
     $(document).on("click", "#searchCity", function(event){
         event.preventDefault();
         var newCity = $(this).siblings("#newCity").val();
         console.log(newCity);
-
+        // Conditions for city search
         if(newCity === "") {
             return;
         } else if (cityList.includes(newCity)) {
@@ -52,26 +50,15 @@ $(document).ready(function () {
         searchCity(cityValue);
     })
 
-
-
-
+    // This stores the searched cities to local storage
     function storeCities() {
-        // console.log(cityList);
         localStorage.setItem("cityList", JSON.stringify(cityList));
-
     }
 
     // function that pulls weather data from Open Weather Api
-    // $("#searchCity").on("click", function (event) {
-        // event.preventDefault();
     function searchCity(city){
         // local variables for method use
-        // var cityName = $("#newCity").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key;
-
-
-        // This pushes the new city into the city list array
-        // cityList.push(city);
         // This method pulls the lat and lon of new city to be used 
         $.ajax({
             url: queryURL,
@@ -81,7 +68,6 @@ $(document).ready(function () {
             var lat = res.coord.lat;
             var lon = res.coord.lon;
             var gpsURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + "&appid=" + key;
-
             // This uses the lat and lon pulled from the above method to call desired weather data
             $.ajax({
                 url: gpsURL,
@@ -102,7 +88,6 @@ $(document).ready(function () {
                 // Displaying data from second object
                 $("#uv").text("UV Index: " + response.current.uvi);
                 $("#wicon").attr("src", iconURL);
-
                 // This Displays 5 day forecast for the week
                 // This displays upcoming dates
                 $("#date1").text(moment().add(1, 'days').format("MMM Do YY"));
@@ -148,10 +133,8 @@ $(document).ready(function () {
                 }
             })
         })
-
         // This saves the users serached city to local storage
         storeCities();
     }
-    // });
 });
 

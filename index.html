@@ -21,8 +21,8 @@
         <aside class="col-3 mt-4 " style="max-width: 20rem;">
             <!-- search bar input -->
             <form class="input-group">
-                <input type="text" class="form-control cityName" placeholder="Search a city" id="newCity"></input>
-                <button class="btn btn-warning" type="button" id="searchCity"><i class="fa fa-search"
+                <input type="text" class="form-control cityName" placeholder="Search a city" id="newCity"/>
+                <button class="btn btn-warning" type="button" id="searchCity"><i class="fa fa-search searchBtn"
                         aria-hidden="true"></i></button>
             </form>
             <br><br>
@@ -37,25 +37,25 @@
                     <!-- this displays current date and city -->
                     <h2 id="currentCity"></h2>
 
-                    <div id="weather">
+                    <div class="justify-content-center"id="weather">
                         <div id="description"></div>
                         <div id="icon"><img id="wicon" src="" alt="Weather icon" /></div>
                         <div id="fahrenheit"></div>
                         <div id="celcius"></div>
                         <div id="humidity"></div>
                         <div id="windSpeed"></div>
-                        <div id="uv"></div>
+                        <div id="uv" style="max-width: 15rem;" class="mx-auto"></div>
                     </div>
                 </div>
             </section>
 
             <!-- section that contains the upcoming forecasts for the week -->
-            <section class="card  mt-4" style="">
+            <section class="card  mt-4 mb-4" >
                 <div class="card-body">
                     <h3>5 Day Forecast:</h3>
                     <!-- forecast cards go here -->
                     <div class="row justify-content-center">
-                        <div class="card col-2 mx-2" id="day1">
+                        <div class="card col-sm mx-2 nextDay" >
                             <div id="date1"></div>
                             <div><img id="wicon1" src="" alt="Weather icon" /></div>
                             <br><br>
@@ -63,7 +63,7 @@
                             <br><br>
                             <div id="humidity1"></div>
                         </div>
-                        <div class="card col-2 mx-2" id="day2">
+                        <div class="card col-sm mx-2 nextDay" >
                             <div id="date2"></div>
                             <div><img id="wicon2" src="" alt="Weather icon" /></div>
                             <br><br>
@@ -71,7 +71,7 @@
                             <br><br>
                             <div id="humidity2"></div>
                         </div>
-                        <div class="card col-2 mx-2" id="day3">
+                        <div class="card col-sm mx-2 nextDay" >
                             <div id="date3"></div>
                             <div><img id="wicon3" src="" alt="Weather icon" /></div>
                             <br><br>
@@ -79,7 +79,7 @@
                             <br><br>
                             <div id="humidity3"></div>
                         </div>
-                        <div class="card col-2 mx-2" id="day4">
+                        <div class="card col-sm mx-2 nextDay" >
                             <div id="date4"></div>
                             <div><img id="wicon4" src="" alt="Weather icon" /></div>
                             <br><br>
@@ -87,7 +87,7 @@
                             <br><br>
                             <div id="humidity4"></div>
                         </div>
-                        <div class="card col-2 mx-2" id="day5">
+                        <div class="card col-sm mx-2 nextDay" >
                             <div id="date5"></div>
                             <div><img id="wicon5" src="" alt="Weather icon" /></div>
                             <br><br>
