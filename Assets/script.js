@@ -75,7 +75,7 @@ $(document).ready(function () {
             }).then(function (response) {
                 console.log(response);
                 var iconCode = response.current.weather[0].icon;
-                var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+                var iconURL = "https://openweathermap.org/img/wn/" + iconCode + ".png";
                 var fahrenheit = Math.round(((parseFloat(res.main.temp) - 273.15) * 1.80 + 32));
                 var celcius = Math.round(parseFloat(res.main.temp) - 273.15);
                 // Displays data onto designated elements
