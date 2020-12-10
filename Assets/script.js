@@ -5,34 +5,52 @@ var cityName = $("#newCity").val();
 
 
 $(document).ready(function () {
+    // localStorage.clear();
     // Retrieve local storage (searched cities)
     var storedCities = JSON.parse(localStorage.getItem("cityList"));
-    if (storedCities !== null) {
-        cityList = storedCities;
-    }
+         cityList = storedCities;
+   
+        renderCities();
+    
 
 
-    renderCities();
+    
 
     // for loop that retrieves all searched cities
     function renderCities() {
 
-        $("#cityList").empty();
+        // $("#cityList").empty();
 
-        // if (cityName === "") {
-        //     cityName = cityList[0];
-
-        // }
-
-        for (var i = 0; i < cityList.length; i++) {
+        for (var i = 0; i < storedCities.length; i++) {
             // this creates a new button and appends it to the ul with a value of each previously searched city
-            $("ul").prepend($("<button>").text(cityList[i]));
+            $("ul").prepend($("<button>").text(storedCities[i]));
             // this adds classes to the enw buttons
             $("button").addClass("input-group-item");
-            $("button").addClass("previousCity");
+            $("button").addClass("city");
         }
     }
+
+    $(document).on("click", "#searchCity", function(event){
+        event.preventDefault();
+        var newCity = $(this).siblings("#newCity").val();
+        console.log(newCity);
+
+        if(newCity === "") {
+            return;
+        } else if (cityList.includes(newCity)) {
+            alert("The city you are looking for is already saved in you history! Just click its name in the list!");
+        } else {
+            cityList.push(newCity);
+            searchCity(newCity);
+        }
+    })
+
     // Create event that sets previouse city buttons to searched city if clicked
+    $(document).on("click", ".city", function(e){
+        e.preventDefault();
+        var cityValue = $(this).text();
+        searchCity(cityValue);
+    })
 
 
 
@@ -44,27 +62,24 @@ $(document).ready(function () {
     }
 
     // function that pulls weather data from Open Weather Api
-    $("#searchCity").on("click", function (event) {
-        event.preventDefault();
+    // $("#searchCity").on("click", function (event) {
+        // event.preventDefault();
+    function searchCity(city){
         // local variables for method use
-
-        var cityName = $("#newCity").val();
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + key;
+        // var cityName = $("#newCity").val();
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key;
 
 
         // This pushes the new city into the city list array
-        cityList.push(cityName);
+        // cityList.push(city);
         // This method pulls the lat and lon of new city to be used 
         $.ajax({
             url: queryURL,
             method: "Get"
         }).then(function (res) {
             console.log(res);
-            lat = res.coord.lat;
-            lon = res.coord.lon;
-
-            var lat;
-            var lon;
+            var lat = res.coord.lat;
+            var lon = res.coord.lon;
             var gpsURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + "&appid=" + key;
 
             // This uses the lat and lon pulled from the above method to call desired weather data
@@ -136,6 +151,7 @@ $(document).ready(function () {
 
         // This saves the users serached city to local storage
         storeCities();
-
-    });
+    }
+    // });
 });
+
