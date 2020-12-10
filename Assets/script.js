@@ -5,7 +5,6 @@ var cityName = $("#newCity").val();
 
 
 $(document).ready(function () {
-    // localStorage.clear();
     // Retrieve local storage (searched cities)
     var storedCities = JSON.parse(localStorage.getItem("cityList"));
          cityList = storedCities;
@@ -16,13 +15,17 @@ $(document).ready(function () {
 
     // For loop that retrieves all searched cities
     function renderCities() {
+
+        if (storedCities === null) {
+            return;
+        } else {
         for (var i = 0; i < storedCities.length; i++) {
             // this creates a new button and appends it to the ul with a value of each previously searched city
             $("ul").prepend($("<button>").text(storedCities[i]));
             // this adds classes to the enw buttons
             $("button").addClass("input-group-item");
             $("button").addClass("city");
-        }
+        }}
         // This grabs users last city that was searched
         var oldCity = storedCities[storedCities.length -1];
         searchCity(oldCity);
@@ -44,8 +47,8 @@ $(document).ready(function () {
     })
 
     // Create event that sets previouse city buttons to searched city if clicked
-    $(document).on("click", ".city", function(){
-        // event.preventDefault();
+    $(document).on("click", ".city", function(event){
+        event.preventDefault();
         var cityValue = $(this).text();
         searchCity(cityValue);
     })
