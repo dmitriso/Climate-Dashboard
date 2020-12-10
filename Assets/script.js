@@ -44,8 +44,8 @@ $(document).ready(function () {
     })
 
     // Create event that sets previouse city buttons to searched city if clicked
-    $(document).on("click", ".city", function(e){
-        e.preventDefault();
+    $(document).on("click", ".city", function(event){
+        event.preventDefault();
         var cityValue = $(this).text();
         searchCity(cityValue);
     })
