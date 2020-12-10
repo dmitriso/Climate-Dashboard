@@ -44,8 +44,8 @@ $(document).ready(function () {
     })
 
     // Create event that sets previouse city buttons to searched city if clicked
-    $(document).on("click", ".city", function(event){
-        event.preventDefault();
+    $(document).on("click", ".city", function(){
+        // event.preventDefault();
         var cityValue = $(this).text();
         searchCity(cityValue);
     })
@@ -109,11 +109,11 @@ $(document).ready(function () {
                 $("#humidity5").text("Humidity: " + response.daily[4].humidity + "%");
                 // This displays the weather icon for upcoming day
                 // URLS to one call open weather api
-                var iconURL0 = "http://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png";
-                var iconURL1 = "http://openweathermap.org/img/wn/" + response.daily[1].weather[0].icon + ".png";
-                var iconURL2 = "http://openweathermap.org/img/wn/" + response.daily[2].weather[0].icon + ".png";
-                var iconURL3 = "http://openweathermap.org/img/wn/" + response.daily[3].weather[0].icon + ".png";
-                var iconURL4 = "http://openweathermap.org/img/wn/" + response.daily[4].weather[0].icon + ".png";
+                var iconURL0 = "https://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png";
+                var iconURL1 = "https://openweathermap.org/img/wn/" + response.daily[1].weather[0].icon + ".png";
+                var iconURL2 = "https://openweathermap.org/img/wn/" + response.daily[2].weather[0].icon + ".png";
+                var iconURL3 = "https://openweathermap.org/img/wn/" + response.daily[3].weather[0].icon + ".png";
+                var iconURL4 = "https://openweathermap.org/img/wn/" + response.daily[4].weather[0].icon + ".png";
                 // This displays icons to the appropriate
                 $("#wicon1").attr("src", iconURL0);
                 $("#wicon2").attr("src", iconURL1);
