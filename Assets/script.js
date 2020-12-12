@@ -7,39 +7,43 @@ var cityName = $("#newCity").val();
 $(document).ready(function () {
     // Retrieve local storage (searched cities)
     var storedCities = JSON.parse(localStorage.getItem("cityList"));
-         cityList = storedCities;
-
-    
-   
-        renderCities();
+    cityList = storedCities;
+    renderCities();
 
     // For loop that retrieves all searched cities
     function renderCities() {
-
+        // If there is no local storage to pull then use a default city
         if (storedCities === null) {
-            return;
+            var defaultCity = "baltimore";
+            searchCity(defaultCity);
+            // If there is local storage then this pulls and displays the search history
         } else {
-        for (var i = 0; i < storedCities.length; i++) {
-            // this creates a new button and appends it to the ul with a value of each previously searched city
-            $("ul").prepend($("<button>").text(storedCities[i]));
-            // this adds classes to the enw buttons
-            $("button").addClass("input-group-item");
-            $("button").addClass("city");
-        }}
-        // This grabs users last city that was searched
-        var oldCity = storedCities[storedCities.length -1];
-        searchCity(oldCity);
+            for (var i = 0; i < storedCities.length; i++) {
+                // this creates a new button and appends it to the ul with a value of each previously searched city
+                $("ul").prepend($("<button>").text(storedCities[i]));
+                // this adds classes to the enw buttons
+                $("button").addClass("input-group-item");
+                $("button").addClass("city");
+            }
+            // This grabs users last city that was searched and displays the information
+            //  This persists
+            var oldCity = storedCities[storedCities.length - 1];
+            searchCity(oldCity);
+        }
+
+
     }
     // This attaches  and sets conditions for search button
-    $(document).on("click", "#searchCity", function(event){
+    $(document).on("click", "#searchCity", function (event) {
         event.preventDefault();
         var newCity = $(this).siblings("#newCity").val();
         console.log(newCity);
         // Conditions for city search
-        if(newCity === "") {
+        if (newCity === "") {
             return;
         } else if (cityList.includes(newCity)) {
             alert("The city you are looking for is already saved in you history! Just click its name in the list!");
+            return;
         } else {
             cityList.push(newCity);
             searchCity(newCity);
@@ -47,7 +51,7 @@ $(document).ready(function () {
     })
 
     // Create event that sets previouse city buttons to searched city if clicked
-    $(document).on("click", ".city", function(event){
+    $(document).on("click", ".city", function (event) {
         event.preventDefault();
         var cityValue = $(this).text();
         searchCity(cityValue);
@@ -59,7 +63,7 @@ $(document).ready(function () {
     }
 
     // function that pulls weather data from Open Weather Api
-    function searchCity(city){
+    function searchCity(city) {
         // local variables for method use
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key;
         // This method pulls the lat and lon of new city to be used 
